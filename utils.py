@@ -128,3 +128,9 @@ def init_jit_model(model_url: str,
         model = torch.jit.load(f.name, map_location=device)
         model.eval()
     return model, Decoder(model.labels)
+
+def init_jit_model_local(model_path: str, device: torch.device = torch.device('cpu')):
+    torch.set_grad_enabled(False)
+    model = torch.jit.load(model_path, map_location=device)
+    model.eval()
+    return model, Decoder(model.labels)
